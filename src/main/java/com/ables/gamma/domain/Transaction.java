@@ -23,7 +23,7 @@ public class Transaction implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Transient
-	private LocalDateTime time;
+	private LocalDateTime transactionTime;
 	private Account recipient;
 	@NotBlank
 	@Column(unique=true)
@@ -42,11 +42,11 @@ public class Transaction implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDateTime getTime() {
-		return time;
+	public LocalDateTime getTransactionTime() {
+		return transactionTime;
 	}
-	public void setTime(LocalDateTime time) {
-		this.time = time;
+	public void setTransactionTime(LocalDateTime time) {
+		this.transactionTime = time;
 	}
 	public Account getRecipient() {
 		return recipient;
@@ -89,6 +89,52 @@ public class Transaction implements Serializable {
 	}
 	public void setCommission(double commission) {
 		this.commission = commission;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cardPin == null) ? 0 : cardPin.hashCode());
+		result = prime * result + ((cardSerial == null) ? 0 : cardSerial.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transaction other = (Transaction) obj;
+		if (cardPin == null) {
+			if (other.cardPin != null)
+				return false;
+		} else if (!cardPin.equals(other.cardPin))
+			return false;
+		if (cardSerial == null) {
+			if (other.cardSerial != null)
+				return false;
+		} else if (!cardSerial.equals(other.cardSerial))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "Transaction [transactionTime=" + transactionTime + ", recipient=" + recipient + ", cardPin=" + cardPin
+				+ ", phoneNumber=" + phoneNumber + ", amount=" + amount + ", commission=" + commission + "]";
 	}
 	
 
