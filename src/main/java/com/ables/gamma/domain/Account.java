@@ -32,9 +32,9 @@ public class Account implements Serializable{
 	
 	public Account() {}
 	
-	public Account(Long id, String accountNumber) {
+	public Account(String accountNumber, String bankName) {
 		super();
-		this.id = id;
+		this.bankName = bankName;
 		this.accountNumber = accountNumber;
 	}
 	
